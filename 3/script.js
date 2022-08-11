@@ -26,14 +26,14 @@ function makeGETRequest(url, callback) {
 
 
 class GoodsItem {
-  constructor({ product_name, price }) {
+  constructor( product_name, price ) {
     this.title = product_name;
     this.price = price;
   }
   render() {
     return `
       <div class="goods-item">
-        <h3>${this.product_name}</h3>
+        <h3>${this.title}</h3>
         <p>${this.price}</p>
       </div>
     `;
@@ -61,7 +61,8 @@ class GoodsList {
   render() {
     let listHtml = '';
     this.goods.forEach(good => {
-      const goodItem = new GoodsItem(good.product_name, good.price);
+      const { product_name, price } = good;
+      const goodItem = new GoodsItem(product_name, price);
       listHtml += goodItem.render();
     });
     document.querySelector('.goods-list').innerHTML = listHtml;
