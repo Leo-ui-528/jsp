@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>eShop</title>
+   <link rel="stylesheet" href="style.css">
+   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+   <script src="script.js"> defer </script>
+</head>
+<body>
+   <div id="root">
+      <header>
+         <h1 class="title">eShop</h1>
+         <div class="search">
+            <input type="text" class="goods-search" v-model="search"/>
+            <button class="search-button" type="button" v-on:click="filterItems">Искать</button>
+         </div>
+         <div class="actions">
+            <button @click="changeVisibleCard" class="cart-button" type="button">Корзина</button>
+         </div>
+      </header>
+   <div class="search">
+    <p>{{ search }}</p>
+   </div>
+      <main>
+         <div v-if='items.length' class="goods-list">
+            <div class="goods-item" v-for="item in filteredItems">
+               <h3>{{ item.product_name }}</h3>
+               <p>{{ item.price }}</p>
+            </div>
+         </div>
+         <div v-else> Список товаров пуст. </div>
+      </main>
+      
+
+      <div v-if="isVisibleCard" class='fixed-area'>
+        <div class="basket-card">
+            <div class="bascet-card__header">
+                <h1 class="bascet-card__header__title">basket card</h1>
+                <div @click="changeVisibleCard" class="basket-card__header__delete-icon"></div>
+            </div>
+            <div class="basket-card__content">content</div>
+        </div>
+      </div>
+      <div>{{ calculatePrice }}</div>
+   </div>
+</body>
+</html>
